@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Product Information</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#producttable tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+        </script>
+</head>
+
+<body>
+<!--  <header th:insert="fragments/adminfragments.html :: header"> </header> -->
+    <div class="container">
+        <br/>
+        <br/>
+        <h1>Products</h1>
+        <br/>
+        <br/>
+        <input class="form-control" id="myInput" type="text" placeholder="Search..">
+        <br>
+        <table  class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+
+            <tbody id="producttable">
+                <tr th:each="product : ${allProducts}">
+                   <td th:text="${product.productId}">Product Id</td>
+                    <td th:text="${product.productName}">Product Name</td>
+                    <td th:text="${product.productPrice}">Product Price</td>
+                    <td><button id="submitBtn" type="submit" class="btn btn-primary mt-3">Add to cart</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
