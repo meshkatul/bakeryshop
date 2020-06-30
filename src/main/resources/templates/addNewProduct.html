@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>New Product</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!--  <header th:insert="fragments/adminfragments.html :: header"> </header>-->
+<br>
+<br>
+<div class="container" style="width: 50%">
+    <h2>Add new product</h2>
+    <br>
+    <form action="#" th:action="@{/products}" th:object="${product}" method="POST">
+        <input id="productId" type="hidden" th:value="${product.productId}"/>
+        <table class="table table-striped">
+            <tbody>
+            <tr>
+                <th>Name</th>
+                <td><input type="text" th:field="*{productName}" /></td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td><input type="text" th:field="*{productPrice}" /></td>
+            </tr>
+            <tr>
+                <th/>
+                <td><button id="submitBtn" type="submit" class="btn btn-primary">Submit</button>&emsp;
+                    <button id="cancelBtn" type="submit" class="btn btn-primary">Cancel</button></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

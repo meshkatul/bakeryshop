@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Product Information</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+          $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#producttable tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
+        </script>
+</head>
+
+<body>
+<!--  <header th:insert="fragments/adminfragments.html :: header"> </header> -->
+    <div class="container">
+        <br/>
+        <br/>
+        <h1>Products</h1>
+        <br/>
+        <br/>
+        <input class="form-control" id="myInput" type="text" placeholder="Search..">
+        <br><br>
+        <button id="newProductBtn" type="submit" class="btn btn-primary mt-3">Add New Product</button>
+        <br><br>
+        <table  class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Edit</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody id="producttable">
+                <tr th:each="product : ${allProducts}">
+                   <td th:text="${product.productId}"/></td>
+                    <td th:text="${product.productName}">Product Name</td>
+                    <td th:text="${product.productPrice}">Product Price</td>
+                     <td><a id="updateBtn"  th:href="@{/products/{productId}(productId=${product.productId})}">Update</a></td>
+                    <td><a id="deleteBtn" th:href="@{/products/delete/{productId}(productId=${product.productId})}">Delete</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script>
+    $(document).ready(function () {
+        $('#newProductBtn').click(function(){
+            window.location.href= 'new';
+        })
+    });
+     
+//     $(document).ready(function () {
+//         $('#updateBtn').click(function(){
+//         	console.log('clicked updateBtn');
+//             window.location.href= 'productsssss/{productId}';
+//         })
+//     });
+</script>
+</body>
